@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapshotsExtractor", "Snaps
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapshotsExtractor.OpenCV", "SnapshotsExtractor.OpenCV\SnapshotsExtractor.OpenCV.csproj", "{3B95DDB7-A633-4D91-B206-57AFD51B56BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleSample", "ConsoleSample\ConsoleSample.csproj", "{F0824E5A-1C36-4485-8184-089C68B18990}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{3B95DDB7-A633-4D91-B206-57AFD51B56BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B95DDB7-A633-4D91-B206-57AFD51B56BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B95DDB7-A633-4D91-B206-57AFD51B56BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0824E5A-1C36-4485-8184-089C68B18990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0824E5A-1C36-4485-8184-089C68B18990}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0824E5A-1C36-4485-8184-089C68B18990}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0824E5A-1C36-4485-8184-089C68B18990}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
