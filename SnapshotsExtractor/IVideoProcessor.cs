@@ -2,6 +2,8 @@
 
 public interface IVideoProcessor
 {
-    Task<IFrame> TakeSnapshotAsync<TOriginalImage>(ISnapshotStrategy<TOriginalImage> snapshotStrategy);
-    IAsyncEnumerable<IFrame> TakeSnapshotsAsync<TOriginalImage>(ISnapshotStrategy<TOriginalImage> snapshotStrategy);
+    ISnapshotStrategy SnapshotStrategy { get; set; }
+
+    Task<IFrame> TakeSnapshotAsync(CancellationToken cancellationToken = default);
+    IAsyncEnumerable<IFrame> TakeSnapshotsAsync(CancellationToken cancellationToken = default);
 }

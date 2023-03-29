@@ -1,6 +1,7 @@
 ﻿namespace SnapshotsExtractor;
 
-public interface ISnapshotStrategy<TOriginalImage>
+public interface ISnapshotStrategy
 {
-    Task<TOriginalImage> NextImageAsync();
+    bool IsNextFrameExists { get; }
+    Task<IFrame> NextFrameAsync(CancellationToken cancellationToken = default);
 }

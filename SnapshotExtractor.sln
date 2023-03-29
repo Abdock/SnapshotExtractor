@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapshotsExtractor", "SnapshotsExtractor\SnapshotsExtractor.csproj", "{4AB58D4A-B22C-4BB1-9F84-306719CCBF8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapshotsExtractor.OpenCV", "SnapshotsExtractor.OpenCV\SnapshotsExtractor.OpenCV.csproj", "{3B95DDB7-A633-4D91-B206-57AFD51B56BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{4AB58D4A-B22C-4BB1-9F84-306719CCBF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AB58D4A-B22C-4BB1-9F84-306719CCBF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AB58D4A-B22C-4BB1-9F84-306719CCBF8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B95DDB7-A633-4D91-B206-57AFD51B56BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B95DDB7-A633-4D91-B206-57AFD51B56BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B95DDB7-A633-4D91-B206-57AFD51B56BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B95DDB7-A633-4D91-B206-57AFD51B56BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
