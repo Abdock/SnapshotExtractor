@@ -1,4 +1,5 @@
 ﻿using OpenCvSharp;
+using SnapshotsExtractor.Exceptions;
 
 namespace SnapshotsExtractor.OpenCV.Strategies;
 
@@ -36,9 +37,9 @@ public class FrequencySnapshotStrategy : ISnapshotStrategy
     {
         return Task.Run(() =>
         {
-            if (_currentFrameIndex + _step > _video.FrameCount)
+            if (!IsNextFrameExists)
             {
-                throw new IndexOutOfRangeException("Next frame is not exists because video stream is end");
+                throw new FrameNotExistsException("Next frame is not exists because video stream is end");
             }
 
             _currentFrameIndex += _step;
