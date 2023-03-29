@@ -42,10 +42,10 @@ public class FrequencySnapshotStrategy : ISnapshotStrategy
                 throw new FrameNotExistsException("Next frame is not exists because video stream is end");
             }
 
-            _currentFrameIndex += _step;
             _video.PosFrames = _currentFrameIndex;
+            _currentFrameIndex += _step;
             _video.Grab();
-            var image = _video.RetrieveMat();
+            using var image = _video.RetrieveMat();
             IFrame frame = new Frame(image.ToBytes());
             return frame;
         }, cancellationToken);
