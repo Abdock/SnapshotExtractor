@@ -1,20 +1,18 @@
 ﻿using OpenCvSharp;
-using SnapshotsExtractor.Exceptions;
 
 namespace SnapshotsExtractor.OpenCV.Strategies;
 
-public class FrequencySnapshotStrategy : ISnapshotStrategy
+public class FrequencyAsyncSnapshotEnumerator : IAsyncSnapshotEnumerator
 {
     private readonly VideoCapture _video;
     private double _frequencyInSeconds;
     private int _currentFrameIndex;
     private int _step;
-    private const int DefaultFrequencyInSeconds = 5;
 
-    public FrequencySnapshotStrategy(string videoPath)
+    public FrequencyAsyncSnapshotEnumerator(VideoCapture capture, TimeSpan frequency)
     {
-        _video = VideoCapture.FromFile(videoPath);
-        var frequency = TimeSpan.FromSeconds(DefaultFrequencyInSeconds);
+        _video = capture;
+        Frequency = frequency;
         CalculateStepAndFrequency(frequency);
         _currentFrameIndex = 0;
     }
@@ -31,23 +29,31 @@ public class FrequencySnapshotStrategy : ISnapshotStrategy
         _step = (int) Math.Round(_frequencyInSeconds * _video.Fps);
     }
 
-    public bool IsNextFrameExists => _currentFrameIndex + _step <= _video.FrameCount;
+    private bool IsNextFrameExists => _currentFrameIndex + _step <= _video.FrameCount;
 
-    public Task<IFrame> NextFrameAsync(CancellationToken cancellationToken = default)
+    public ValueTask DisposeAsync()
     {
-        return Task.Run(() =>
+        GC.SuppressFinalize(this);
+        return ValueTask.CompletedTask;
+    }
+
+    public async ValueTask<bool> MoveNextAsync()
+    {
+        return await Task.Run(() =>
         {
             if (!IsNextFrameExists)
             {
-                throw new FrameNotExistsException("Next frame is not exists because video stream is end");
+                return false;
             }
 
             _video.PosFrames = _currentFrameIndex;
             _currentFrameIndex += _step;
             _video.Grab();
             using var image = _video.RetrieveMat();
-            IFrame frame = new Frame(image.ToBytes());
-            return frame;
-        }, cancellationToken);
+            Current = new Frame(image.ToBytes());
+            return true;
+        });
     }
+
+    public IFrame Current { get; private set; } = null!;
 }

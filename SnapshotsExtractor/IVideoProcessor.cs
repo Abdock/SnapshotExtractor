@@ -1,9 +1,6 @@
 ﻿namespace SnapshotsExtractor;
 
-public interface IVideoProcessor
+public interface IVideoProcessor : IAsyncEnumerable<IFrame>
 {
-    ISnapshotStrategy SnapshotStrategy { get; set; }
-
-    Task<IFrame> TakeSnapshotAsync(CancellationToken cancellationToken = default);
-    IAsyncEnumerable<IFrame> TakeSnapshotsAsync(CancellationToken cancellationToken = default);
+    IAsyncSnapshotEnumerator AsyncSnapshotEnumerator { get; set; }
 }

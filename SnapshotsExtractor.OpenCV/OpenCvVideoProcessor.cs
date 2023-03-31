@@ -4,23 +4,15 @@ namespace SnapshotsExtractor.OpenCV;
 
 public class OpenCvVideoProcessor : IVideoProcessor
 {
-    public ISnapshotStrategy SnapshotStrategy { get; set; }
+    public IAsyncSnapshotEnumerator AsyncSnapshotEnumerator { get; set; }
 
-    public OpenCvVideoProcessor(ISnapshotStrategy snapshotStrategy)
+    public OpenCvVideoProcessor(IAsyncSnapshotEnumerator asyncSnapshotEnumerator)
     {
-        SnapshotStrategy = snapshotStrategy;
+        AsyncSnapshotEnumerator = asyncSnapshotEnumerator;
     }
 
-    public async Task<IFrame> TakeSnapshotAsync(CancellationToken cancellationToken = default)
+    public IAsyncEnumerator<IFrame> GetAsyncEnumerator(CancellationToken cancellationToken = default)
     {
-        return await SnapshotStrategy.NextFrameAsync(cancellationToken);
-    }
-
-    public async IAsyncEnumerable<IFrame> TakeSnapshotsAsync([EnumeratorCancellation] CancellationToken cancellationToken = default)
-    {
-        while (SnapshotStrategy.IsNextFrameExists)
-        {
-            yield return await SnapshotStrategy.NextFrameAsync(cancellationToken);
-        }
+        return AsyncSnapshotEnumerator;
     }
 }
