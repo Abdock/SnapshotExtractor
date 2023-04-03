@@ -50,7 +50,7 @@ public class FrequencyAsyncSnapshotEnumerator : IAsyncSnapshotEnumerator
             _currentFrameIndex += _step;
             _video.Grab();
             using var image = _video.RetrieveMat();
-            Current = new Frame(image.ToBytes());
+            Current = new Frame(image);
             return true;
         });
     }
