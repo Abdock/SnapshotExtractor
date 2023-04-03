@@ -2,9 +2,5 @@
 
 public interface IFrame : IDisposable
 {
-    byte[] ToByte();
-
-    Task<byte[]> ToByteAsync(CancellationToken cancellationToken = default);
-
-    void SaveToFile(string file);
+    ISnapshotDataChunkEnumerator GetEnumerator();
 }
