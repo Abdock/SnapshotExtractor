@@ -10,7 +10,7 @@ public class OpenCvSample
 {
     public static async Task RunAsync()
     {
-        const string path = @"C:\Users\Administrator\Videos\Genshin Impact\Abyss.mp4";
+        const string path = @"<Path to file or url>";
         using var video = VideoCapture.FromFile(path);
         IAsyncSnapshotEnumerator enumerator = new FrequencyAsyncSnapshotEnumerator(video, TimeSpan.FromSeconds(5));
         IVideoProcessor processor = new OpenCvVideoProcessor(enumerator);
