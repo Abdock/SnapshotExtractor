@@ -1,4 +1,5 @@
-﻿using OpenCvSharp;
+﻿using System.Runtime.InteropServices;
+using OpenCvSharp;
 
 namespace SnapshotsExtractor.OpenCV;
 
@@ -14,6 +15,18 @@ public sealed class Frame : IFrame
     public ISnapshotDataChunkEnumerator GetEnumerator()
     {
         return new FrameDataEnumerator(_image);
+    }
+
+    public void SaveInFile(string file)
+    {
+        var data = new List<byte>();
+        foreach (var chunk in this)
+        {
+            data.AddRange(chunk);
+        }
+
+        var image = new Mat(new[] {_image.Height, _image.Width}, MatType.CV_8UC3, data.ToArray());
+        image.SaveImage(file);
     }
 
     public void Dispose()
@@ -41,14 +54,11 @@ public sealed class Frame : IFrame
             if (_currentIndex < _endIndex)
             {
                 var length = (int) Math.Min(_endIndex - _currentIndex, ChunkLength);
-                unsafe
+                for (var i = 0; i < length; ++i)
                 {
-                    var ptr = _image.DataPointer;
-                    for (var i = 0; i < length; ++i)
-                    {
-                        Current[i] = *(ptr + i);
-                    }
+                    Current[i] = Marshal.ReadByte(_image.Data, _currentIndex + i);
                 }
+
                 _currentIndex += length;
                 return true;
             }
@@ -57,13 +67,5 @@ public sealed class Frame : IFrame
         }
 
         public byte[] Current { get; }
-
-        public void Dispose()
-        {
-            if (!_image.IsDisposed)
-            {
-                _image.Dispose();
-            }
-        }
     }
 }
