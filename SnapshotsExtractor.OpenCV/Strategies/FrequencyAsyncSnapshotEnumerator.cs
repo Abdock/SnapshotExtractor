@@ -46,14 +46,16 @@ public class FrequencyAsyncSnapshotEnumerator : IAsyncSnapshotEnumerator
                 return false;
             }
 
+            Current?.Dispose();
             _video.PosFrames = _currentFrameIndex;
             _currentFrameIndex += _step;
             _video.Grab();
             using var image = _video.RetrieveMat();
-            Current = new Frame(image);
+            using var byteImage = new Mat<byte>(image);
+            Current = new Frame(byteImage);
             return true;
         });
     }
 
-    public IFrame Current { get; private set; } = null!;
+    public IFrame? Current { get; private set; }
 }

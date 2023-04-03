@@ -34,7 +34,8 @@ public class CascadeContainsAsyncSnapshotEnumerator : IAsyncSnapshotEnumerator
                 rects = _classifier.DetectMultiScale(image);
                 if (rects.Any())
                 {
-                    frame = new Frame(image.ToBytes());
+                    var byteImage = new Mat<byte>();
+                    frame = new Frame(byteImage);
                 }
             } while (!rects.Any() && IsNextFrameExists);
 
@@ -68,7 +69,8 @@ public class CascadeContainsAsyncSnapshotEnumerator : IAsyncSnapshotEnumerator
                 rects = _classifier.DetectMultiScale(image);
                 if (rects.Any())
                 {
-                    frame = new Frame(image.ToBytes());
+                    var byteImage = new Mat<byte>(image);
+                    frame = new Frame(byteImage);
                 }
             } while (!rects.Any() && IsNextFrameExists);
 
