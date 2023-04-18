@@ -12,4 +12,8 @@
       <ProjectReference Include="..\SnapshotsExtractor\SnapshotsExtractor.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="System.IO.Pipelines" Version="7.0.0" />
+    </ItemGroup>
+
 </Project>

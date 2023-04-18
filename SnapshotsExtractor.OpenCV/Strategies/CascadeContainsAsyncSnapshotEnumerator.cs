@@ -1,5 +1,4 @@
-﻿using System.Buffers;
-using OpenCvSharp;
+﻿using OpenCvSharp;
 
 namespace SnapshotsExtractor.OpenCV.Strategies;
 
@@ -9,14 +8,12 @@ public class CascadeContainsAsyncSnapshotEnumerator : IAsyncSnapshotEnumerator
     private readonly CascadeClassifier _classifier;
     private readonly int _step;
     private int _currentFrameIndex;
-    private readonly ArrayPool<byte> _pool;
 
     public CascadeContainsAsyncSnapshotEnumerator(VideoCapture video, CascadeClassifier classifier)
     {
         _video = video;
         _classifier = classifier;
         _step = (int) Math.Round(_video.Fps);
-        _pool = ArrayPool<byte>.Create();
     }
 
     private bool IsNextFrameExists => _currentFrameIndex + _step <= _video.FrameCount;
@@ -56,5 +53,5 @@ public class CascadeContainsAsyncSnapshotEnumerator : IAsyncSnapshotEnumerator
         });
     }
 
-    public IFrame Current { get; private set; } = null!;
+    public IFrame? Current { get; private set; }
 }

@@ -1,5 +1,4 @@
-﻿using System.Buffers;
-using OpenCvSharp;
+﻿using OpenCvSharp;
 
 namespace SnapshotsExtractor.OpenCV.Strategies;
 
@@ -9,7 +8,6 @@ public class FrequencyAsyncSnapshotEnumerator : IAsyncSnapshotEnumerator
     private double _frequencyInSeconds;
     private int _currentFrameIndex;
     private int _step;
-    private readonly ArrayPool<byte> _pool;
 
     public FrequencyAsyncSnapshotEnumerator(VideoCapture capture, TimeSpan frequency)
     {
@@ -17,7 +15,6 @@ public class FrequencyAsyncSnapshotEnumerator : IAsyncSnapshotEnumerator
         Frequency = frequency;
         CalculateStepAndFrequency(frequency);
         _currentFrameIndex = 0;
-        _pool = ArrayPool<byte>.Create();
     }
 
     public TimeSpan Frequency

@@ -2,7 +2,5 @@
 
 public interface IFrame : IDisposable
 {
-    ISnapshotDataChunkEnumerator GetEnumerator();
-
-    void SaveInFile(string file);
+    void SaveInFile(string path);
 }

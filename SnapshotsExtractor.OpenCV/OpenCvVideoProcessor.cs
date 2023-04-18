@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace SnapshotsExtractor.OpenCV;
+﻿namespace SnapshotsExtractor.OpenCV;
 
 public class OpenCvVideoProcessor : IVideoProcessor
 {
